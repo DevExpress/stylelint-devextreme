@@ -21,7 +21,7 @@ it("warns for direct import of public widget (from other widget)", async () => {
     const [{ line, column, text }] = warnings;
 
     expect(text).toBe(
-        `Public widget 'widget1' is used in the "@use" at-rule directly. Use _colors or _sizes to import variables only`
+        `Public widget 'widget1' is used in the "@use" at-rule directly. Use _colors, _sizes, _mixins instead`
     );
     expect(line).toBe(12);
     expect(column).toBe(1);

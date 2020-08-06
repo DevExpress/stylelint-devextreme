@@ -1,0 +1,5 @@
+@use "./widget1" as *; // directly import from common - wrong import
+@use "./widget1/widget1" as *; // import from common, from subfolder - wrong import
+@use "../base/_widget2" as *; // import from base - right import
+
+.dx-accordion-item-title {}

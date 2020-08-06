@@ -1,0 +1,16 @@
+{
+  "name": "stylelint-devextreme",
+  "version": "0.0.1",
+  "description": "Additional stylelint rules for devextreme",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "jest": "^26.2.2",
+    "stylelint": "^13.6.1"
+  },
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "author": "",
+  "license": "MIT"
+}

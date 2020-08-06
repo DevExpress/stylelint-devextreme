@@ -1,0 +1,13 @@
+@use "sass:color";
+@use "colors" as *;
+@use "sizes" as *;
+@use "../colors" as *;
+@use "../sizes" as *;
+
+@use "../widget1/colors" as *;
+@use "../widget1/sizes" as *;
+@use "../widget1/mixins" as *;
+@use "../../common/widget2" as *;
+@use "../../base/widget2" as *;
+@use "../widget1" as *; // public widget - wrong import
+@use "../widget3" as *; // private widget - right import

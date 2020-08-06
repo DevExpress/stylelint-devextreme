@@ -1,0 +1,11 @@
+$color: null !default;
+$size: null !default;
+
+@use "colors" with ($color: $color);
+@use "sizes" with ($size: $size);
+@use "./typography";
+@use "./icons";
+
+// public widgets
+@use "./widget1";
+@use "./widget2";

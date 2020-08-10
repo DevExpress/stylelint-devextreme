@@ -3,7 +3,7 @@ const { lint } = require("stylelint");
 const config = {
     plugins: ["./index.js"],
     rules: {
-        "devextreme/only-variables-in-use": [true]
+        "devextreme/at-use-no-public-widgets": [true]
     }
 };
 

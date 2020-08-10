@@ -2,9 +2,9 @@ const path = require('path');
 const fs = require('fs');
 const stylelint = require('stylelint');
 
-const ruleName = 'devextreme/only-variables-in-use';
+const ruleName = 'devextreme/at-use-no-public-widgets';
 const messages = stylelint.utils.ruleMessages(ruleName, {
-    expected: 'Expected "@use" at-rule import only variables and private widgets'
+    expected: '@use must not load a public widget'
 });
 
 const cwd = process.cwd();

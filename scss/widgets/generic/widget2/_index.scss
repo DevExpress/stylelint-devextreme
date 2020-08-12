@@ -11,3 +11,7 @@
 @use "../../base/widget2" as *;
 @use "../widget1" as *; // public widget - wrong import
 @use "../widget3" as *; // private widget - right import
+
+ // partial imports (must not to cause error)
+ @use "../../base";
+ @use "../../base/";

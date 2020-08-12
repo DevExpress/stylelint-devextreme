@@ -1,6 +1,6 @@
 {
   "name": "stylelint-devextreme",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Stylelint plugin for DevExtreme styles",
   "repository": {
     "type" : "git",

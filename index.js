@@ -43,7 +43,7 @@ const parseAndResolveImport = (importString, fileName) => {
     const cwdRelativePath = path.relative(cwd, absolutePath);
     const pathParts = cwdRelativePath.split(path.sep);
     const theme = pathParts[2];
-    let widget = pathParts[3].toLowerCase();
+    let widget = pathParts[3] ? pathParts[3].toLowerCase() : null;
     let file = pathParts[4] || INDEX;
 
     if (widget === COLORS || widget === SIZES) {

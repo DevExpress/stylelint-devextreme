@@ -38,10 +38,15 @@ const getPublicWidgetsList = (theme) => {
 
 const parseAndResolveImport = (importString, fileName) => {
     if (importString === "\"sass:color\"") return { file: COLORS };
+
     const relativePath = importString.split('"')[1];
+
+    if (!relativePath) return {};
+
     const absolutePath = path.resolve(path.dirname(fileName), relativePath);
     const cwdRelativePath = path.relative(cwd, absolutePath);
     const pathParts = cwdRelativePath.split(path.sep);
+
     const theme = pathParts[2];
     let widget = pathParts[3] ? pathParts[3].toLowerCase() : null;
     let file = pathParts[4] || INDEX;
@@ -58,18 +63,22 @@ const parseAndResolveImport = (importString, fileName) => {
     }
 }
 
-module.exports = stylelint.createPlugin(ruleName, function (primaryOption) {
+module.exports = stylelint.createPlugin(ruleName, function (primary) {
     return function (root, result) {
-        if (!primaryOption) return;
-
         const validOptions = stylelint.utils.validateOptions(
             result,
-            ruleName
+            ruleName,
+            {
+                actual: primary,
+                possible: [false, true],
+            }
         );
 
         if (!validOptions) {
             return;
         }
+
+        if (!primary) return;
 
         if (root.source.lang !== 'scss') {
             return;
@@ -85,7 +94,7 @@ module.exports = stylelint.createPlugin(ruleName, function (primaryOption) {
 
         if (theme !== 'material' && theme !== 'generic') {
             // this the path of the source file
-            // TODO common or base - should not import from 'common' directly
+            // TODO any base file should not import other base file with styles (mixins only allowed)
             return;
         }
 
@@ -102,7 +111,7 @@ module.exports = stylelint.createPlugin(ruleName, function (primaryOption) {
 
             const { theme, widget, file } = parseAndResolveImport(node.params, fileName);
 
-            if (file === COLORS || file === SIZES || file === MIXINS) {
+            if (file === COLORS || file === SIZES || file === MIXINS || file === undefined) {
                 return;
             }
 

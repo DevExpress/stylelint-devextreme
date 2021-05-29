@@ -10,10 +10,13 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
 const cwd = process.cwd();
 const publicWidgetsCache = {};
 
+const MATH = 'math';
 const COLORS = 'colors';
 const SIZES = 'sizes';
-const INDEX = 'index';
 const MIXINS = 'mixins';
+const allowedIncludes = [MATH, COLORS, SIZES, MIXINS];
+
+const INDEX = 'index';
 
 const getPublicWidgetsList = (theme) => {
     if (publicWidgetsCache[theme]) {
@@ -38,6 +41,7 @@ const getPublicWidgetsList = (theme) => {
 
 const parseAndResolveImport = (importString, fileName) => {
     if (importString === "\"sass:color\"") return { file: COLORS };
+    if (importString === "\"sass:math\"") return { file: MATH };
 
     const relativePath = importString.split('"')[1];
 
@@ -111,12 +115,9 @@ module.exports = stylelint.createPlugin(ruleName, function (primary) {
 
             const { theme, widget, file } = parseAndResolveImport(node.params, fileName);
 
-            if (file === COLORS || file === SIZES || file === MIXINS || file === undefined) {
-                return;
-            }
-
-            if (theme !== 'material' && theme !== 'generic') {
-                // this the path of the imported file (we can import anything from 'common' and 'base' now)
+            const isAllowedInclude = file === undefined || allowedIncludes.includes(file);
+            const isTheme = theme === 'material' || theme === 'generic';
+            if(isAllowedInclude || !isTheme) {
                 return;
             }
 

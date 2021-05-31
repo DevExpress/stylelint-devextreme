@@ -23,7 +23,7 @@ it('warns for direct import of public widget (from other widget)', async () => {
     expect(text).toBe(
         `Public widget 'widget1' is used in the "@use" at-rule directly. Use _colors, _sizes, _mixins instead`
     );
-    expect(line).toBe(12);
+    expect(line).toBe(13);
     expect(column).toBe(1);
 });
 

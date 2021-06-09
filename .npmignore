@@ -1,5 +1,5 @@
 scss
-index.test.js
+rules/**/tests
 jest.config.js
 coverage
 .github

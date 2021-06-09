@@ -3,11 +3,11 @@ const { lint } = require('stylelint');
 const config = {
     plugins: ['./index.js'],
     rules: {
-        'devextreme/at-use-no-public-widgets': true
+        'devextreme/at-use-no-public-components': true
     }
 };
 
-it('warns for direct import of public widget (from other widget)', async () => {
+it('warns for direct import of public component (from other component)', async () => {
     const {
         results: [{ warnings, parseErrors }]
     } = await lint({
@@ -21,7 +21,7 @@ it('warns for direct import of public widget (from other widget)', async () => {
     const [{ line, column, text }] = warnings;
 
     expect(text).toBe(
-        `Public widget 'widget1' is used in the "@use" at-rule directly. Use _colors, _sizes, _mixins instead`
+        `The @use rule doesn't allow public components (widget1). Use _colors, _sizes, _mixins instead.`
     );
     expect(line).toBe(13);
     expect(column).toBe(1);
@@ -125,7 +125,7 @@ it('ignore wrong options', async () => {
         config: {
             plugins: ['./index.js'],
             rules: {
-                'devextreme/at-use-no-public-widgets': 'some'
+                'devextreme/at-use-no-public-components': 'some'
             }
         }
     });
@@ -142,7 +142,7 @@ it('ignore with "false" option', async () => {
         config: {
             plugins: ['./index.js'],
             rules: {
-                'devextreme/at-use-no-public-widgets': false
+                'devextreme/at-use-no-public-components': false
             }
         }
     });

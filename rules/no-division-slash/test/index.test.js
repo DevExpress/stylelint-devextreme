@@ -3,7 +3,7 @@ const { lint } = require('stylelint');
 const config = {
     plugins: ['./index.js'],
     rules: {
-        'devextreme/no-slash-division': true
+        'devextreme/no-division-slash': true
     }
 };
 
@@ -21,7 +21,7 @@ it('warns use delimiter', async () => {
     const [{ line, text }] = warnings;
 
     expect(text).toBe(
-        "Style 'margin' contains slash division. If you want to use division then use 'math.div()'."
+        "Style 'margin' contains a division slash '/'. Use 'math.div()' for division instead."
     );
     expect(line).toBe(6);
 });
@@ -34,7 +34,7 @@ it('ignore wrong options', async () => {
         config: {
             plugins: ['./index.js'],
             rules: {
-                'devextreme/no-slash-division': 'none'
+                'devextreme/no-division-slash': 'none'
             }
         }
     });

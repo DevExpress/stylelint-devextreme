@@ -1,9 +1,9 @@
-const atUseNoPublicWidgets = require('./at-use-no-public-widgets');
-const atWithoutDelimiter = require('./no-slash-division');
+const atUseNoPublicComponents = require('./at-use-no-public-components');
+const noDivisionSlash = require('./no-division-slash');
 
 var exportModules = {
-    'at-use-no-public-widgets': atUseNoPublicWidgets,
-    'no-slash-division': atWithoutDelimiter
+    'at-use-no-public-components': atUseNoPublicComponents,
+    'no-division-slash': noDivisionSlash
 }
 
 module.exports = exportModules;

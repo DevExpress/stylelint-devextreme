@@ -1,8 +1,8 @@
 const stylelint = require('stylelint');
 
-const ruleName = 'no-slash-division';
+const ruleName = 'no-division-slash';
 const messages = stylelint.utils.ruleMessages(ruleName, {
-    expected: "Use 'math.div()' instead of slash division"
+    expected: "Use 'math.div()' instead of a division slash"
 });
 
 const enableStyles = [
@@ -39,7 +39,7 @@ module.exports = function(primary) {
             stylelint.utils.report({
                 ruleName,
                 result,
-                message: `Style '${prop}' contains slash division. If you want to use division then use 'math.div()'.`,
+                message: `Style '${prop}' contains a division slash '/'. Use 'math.div()' for division instead.`,
                 node: decl
             });
         });

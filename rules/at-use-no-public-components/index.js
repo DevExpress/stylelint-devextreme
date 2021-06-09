@@ -2,9 +2,9 @@ const path = require('path');
 const fs = require('fs');
 const stylelint = require('stylelint');
 
-const ruleName = 'at-use-no-public-widgets';
+const ruleName = 'at-use-no-public-components';
 const messages = stylelint.utils.ruleMessages(ruleName, {
-    expected: '@use must not load a public widget'
+    expected: '@use must not load a public DevExtreme component'
 });
 
 const cwd = process.cwd();
@@ -125,7 +125,7 @@ module.exports = function (primary) {
 
             if (publicWidgets.includes(widget)) {
                 stylelint.utils.report({
-                    message: `Public widget '${widget}' is used in the "@use" at-rule directly. Use _colors, _sizes, _mixins instead`,
+                    message: `The @use rule doesn't allow public components (${widget}). Use _colors, _sizes, _mixins instead.`,
                     ruleName,
                     result,
                     node,

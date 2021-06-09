@@ -1,8 +1,8 @@
 const stylelint = require('stylelint');
 
-const ruleName = 'at-without-delimiter';
+const ruleName = 'no-slash-division';
 const messages = stylelint.utils.ruleMessages(ruleName, {
-    expected: "style must not contains delimiter '/'"
+    expected: "Use 'math.div()' instead of slash division"
 });
 
 const enableStyles = [
@@ -36,12 +36,10 @@ module.exports = function(primary) {
                 return;
             }
 
-            console.table(decl);
-
             stylelint.utils.report({
                 ruleName,
                 result,
-                message: `Style '${prop}' contains delimiter '/'. If you want to use division then use 'math.div()'.`,
+                message: `Style '${prop}' contains slash division. If you want to use division then use 'math.div()'.`,
                 node: decl
             });
         });

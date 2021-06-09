@@ -5,7 +5,7 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
     expected: "Use 'math.div()' instead of a division slash"
 });
 
-const enableStyles = [
+const enableProperties = [
     'grid-area',
     'grid-row',
     'grid-column'
@@ -32,7 +32,7 @@ module.exports = function(primary) {
                 return;
             }
 
-            if(enableStyles.includes(prop)) {
+            if(enableProperties.includes(prop)) {
                 return;
             }
 

@@ -8,7 +8,7 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
 });
 
 const cwd = process.cwd();
-const publicWidgetsCache = {};
+const publicComponentsCache = {};
 
 const MATH = 'math';
 const COLORS = 'colors';
@@ -18,9 +18,9 @@ const allowedIncludes = [MATH, COLORS, SIZES, MIXINS];
 
 const INDEX = 'index';
 
-const getPublicWidgetsList = (theme) => {
-    if (publicWidgetsCache[theme]) {
-        return publicWidgetsCache[theme];
+const getPublicComponentsList = (theme) => {
+    if (publicComponentsCache[theme]) {
+        return publicComponentsCache[theme];
     }
 
     const indexFileName = path.join(cwd, 'scss', 'widgets', theme, '_index.scss');
@@ -34,7 +34,7 @@ const getPublicWidgetsList = (theme) => {
         result.push(matches[1].toLowerCase());
     }
 
-    publicWidgetsCache[theme] = result;
+    publicComponentsCache[theme] = result;
 
     return result;
 };
@@ -52,17 +52,17 @@ const parseAndResolveImport = (importString, fileName) => {
     const pathParts = cwdRelativePath.split(path.sep);
 
     const theme = pathParts[2];
-    let widget = pathParts[3] ? pathParts[3].toLowerCase() : null;
+    let component = pathParts[3] ? pathParts[3].toLowerCase() : null;
     let file = pathParts[4] || INDEX;
 
-    if (widget === COLORS || widget === SIZES) {
-        file = widget;
-        widget = null;
+    if (component === COLORS || component === SIZES) {
+        file = component;
+        component = null;
     }
 
     return {
         theme,
-        widget,
+        component,
         file
     }
 }
@@ -113,7 +113,7 @@ module.exports = function (primary) {
                 return;
             }
 
-            const { theme, widget, file } = parseAndResolveImport(node.params, fileName);
+            const { theme, component, file } = parseAndResolveImport(node.params, fileName);
 
             const isAllowedInclude = file === undefined || allowedIncludes.includes(file);
             const isTheme = theme === 'material' || theme === 'generic';
@@ -121,11 +121,11 @@ module.exports = function (primary) {
                 return;
             }
 
-            const publicWidgets = getPublicWidgetsList(theme);
+            const publicComponents = getPublicComponentsList(theme);
 
-            if (publicWidgets.includes(widget)) {
+            if (publicComponents.includes(component)) {
                 stylelint.utils.report({
-                    message: `The @use rule doesn't allow public components (${widget}). Use _colors, _sizes, _mixins instead.`,
+                    message: `The @use rule doesn't allow public components (${component}). Use _colors, _sizes, _mixins instead.`,
                     ruleName,
                     result,
                     node,

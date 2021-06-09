@@ -7,7 +7,7 @@ const config = {
     }
 };
 
-it('warns for direct import of public widget (from other widget)', async () => {
+it('warns for direct import of public component (from other component)', async () => {
     const {
         results: [{ warnings, parseErrors }]
     } = await lint({

@@ -7,14 +7,18 @@
     "url": "https://github.com/DevExpress/stylelint-devextreme.git"
   },
   "main": "index.js",
-  "dependencies": {},
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=10.0.0"
+  },
   "devDependencies": {
-    "jest": "^26.2.2",
+    "jest": "^30.2.0",
     "stylelint": "^13.6.1"
   },
   "scripts": {
     "test": "jest --coverage"
   },
   "author": "Developer Express Inc.",
-  "license": "MIT"
+  "license": "MIT",
+  "packageManager": "pnpm@10.22.0+sha512.bf049efe995b28f527fd2b41ae0474ce29186f7edcb3bf545087bd61fbbebb2bf75362d1307fda09c2d288e1e499787ac12d4fcb617a974718a6051f2eee741c"
 }

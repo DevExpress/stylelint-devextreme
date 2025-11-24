@@ -1,2 +1,1 @@
-# stylelint-devextreme
-Stylelint plugin for DevExtreme styles
+# ⚠️ Repository is archived ⚠️
